@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coe.nprcet.org</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body, html { margin: 0; padding: 0; height: 100%; background-color: #f0f0f0; }
+
+        /* --- LOGIN PAGE STYLING --- */
+        #login-page {
+            background: url('https://share.google/wBU3djJFCzuZgUYRR'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #login-page::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(3px);
+        }
+
+        .login-card {
+            position: relative;
+            width: 90%;
+            max-width: 350px;
+            background: linear-gradient(to bottom, #26a69a 0%, #ffffff 75%);
+            border-radius: 25px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .logo-box {
+            background: white;
+            padding: 8px 15px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; font-size: 11px; font-weight: bold; color: #333; margin-bottom: 4px; text-align: center; }
+        .input-group input { 
+            width: 100%; 
+            padding: 8px; 
+            border: 1px solid #99d5cf; 
+            border-radius: 5px; 
+            text-align: center;
+            font-size: 13px;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .captcha-box {
+            background: #a32a2a;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 15px auto;
+            width: 60%;
+            border-radius: 4px;
+            letter-spacing: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .btn-submit {
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+            padding: 7px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .footer-text { font-size: 10px; margin-top: 20px; color: #444; line-height: 1.5; font-weight: 500; }
+
+        /* --- RESULTS PAGE STYLING --- */
+        #results-page { display: none; background: white; min-height: 100vh; }
+        
+        .header-bar {
+            background: #009688;
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .college-info { flex-grow: 1; }
+
+        /* Updated Profile Section Layout */
+        .student-profile-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .profile-img-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            background-color: #ddd; /* Fallback color */
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .student-details {
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .student-details span { font-weight: bold; }
+
+        .logout-link {
+            color: white;
+            text-decoration: underline;
+            font-size: 9px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .disclaimer {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            font-size: 10px;
+            color: #555;
+            background: #fdfdfd;
+        }
+
+        .results-title {
+            background: #7030a0;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        table {
+            width: calc(100% - 20px);
+            margin: 0 10px;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+
+        th {
+            border: 1px solid #ccc;
+            padding: 8px 5px;
+            text-align: left;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        td {
+            border: 1px solid #eee;
+            padding: 8px 5px;
+            color: #222;
+        }
+
+        .pass-status { color: #2e7d32; font-weight: bold; }
+        .grade-bold { font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <div id="login-page">
+        <div class="login-card">
+            <div class="logo-box"><strong style="color:#003d7a; font-size: 26px;">NPR</strong></div>
+            <div class="input-group">
+                <label>Login ID :</label>
+                <input type="text" id="regNo" placeholder="Enter Roll No">
+            </div>
+            <div class="input-group">
+                <label>Password :</label>
+                <input type="password" id="pass" placeholder="Enter Password">
+            </div>
+            <div class="captcha-box">q4rxdJ</div>
+            <div class="input-group">
+                <label>Enter Captcha :</label>
+                <input type="text" id="captcha">
+            </div>
+            <button class="btn-submit" onclick="validateLogin()">Submit</button>
+            <div class="footer-text">Copyright © COXCO<br>All rights reserved.</div>
+        </div>
+    </div>
+
+    <div id="results-page">
+        <div class="header-bar">
+            <div class="college-info">
+                <strong style="font-size: 13px;">NPR College of Engineering & Technology</strong><br>
+                <span style="font-size: 9px;">(An Autonomous Institution, Affiliated to Anna University, Chennai)</span><br>
+                <span style="font-size: 9px;">Approved by AICTE, Accredited by NAAC with 'A' Grade</span>
+            </div>
+            
+            <div class="student-profile-section">
+                <div class="profile-img-container">
+                    <img src="profile.jpg" alt="Student">
+                </div>
+                <div class="student-details">
+                    User : <span>HANSON ISAAC D</span><br>
+                    Roll No. : <span>583224104032</span>
+                    <a href="#" onclick="location.reload()" class="logout-link">LOGOUT</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer"><strong>Disclaimer :</strong> The college is not responsible for any inadvertent error that may have crept in the results being published on Net...</div>
+
+        <div class="results-title">RESULTS OF THIRD SEMESTER : [2025 - ODD SEMESTER - END SEMESTER]</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sem</th><th>Part</th><th>Course Code</th><th>Name of the Course</th><th>Credit</th><th>Result</th><th>GR.</th><th>G.P.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>3</td><td>23MA101</td><td>MATRICES AND CALCULUS</td><td>4.00</td><td class="pass-status">PASS</td><td class="grade-bold">C</td><td class="grade-bold">5.00</td></tr>
+                <tr><td>2</td><td>3</td><td>23BE201</td><td>BASIC ELECTRICAL AND ELECTRONICS ENGINEERING</td><td>3.00</td><td class="pass-status">PASS</td><td class="grade-bold">C</td><td class="grade-bold">5.00</td></tr>
+                <tr><td>2</td><td>3</td><td>23CS201</td><td>PYTHON PROGRAMMING</td><td>3.00</td><td class="pass-status">PASS</td><td class="grade-bold">C</td><td class="grade-bold">5.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23MA302</td><td>DISCRETE MATHEMATICS</td><td>4.00</td><td class="pass-status">PASS</td><td class="grade-bold">B</td><td class="grade-bold">6.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23CS901</td><td>DIGITAL PRINCIPLES AND COMPUTER ORGANIZATION [IC]</td><td>4.00</td><td class="pass-status">PASS</td><td class="grade-bold">C</td><td class="grade-bold">5.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23CS301</td><td>DATA STRUCTURES AND ALGORITHMS [IC]</td><td>4.00</td><td class="pass-status">PASS</td><td class="grade-bold">B</td><td class="grade-bold">6.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23CS302</td><td>FOUNDATIONS OF DATA SCIENCE</td><td>3.00</td><td class="pass-status">PASS</td><td class="grade-bold">C</td><td class="grade-bold">5.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23CS303</td><td>OBJECT ORIENTED PROGRAMMING USING JAVA</td><td>3.00</td><td class="pass-status">PASS</td><td class="grade-bold">B+</td><td class="grade-bold">7.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23CS311</td><td>DATA SCIENCE LABORATORY</td><td>1.50</td><td class="pass-status">PASS</td><td class="grade-bold">A</td><td class="grade-bold">8.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23CS312</td><td>OBJECT ORIENTED PROGRAMMING USING JAVA LABORATORY</td><td>1.50</td><td class="pass-status">PASS</td><td class="grade-bold">A</td><td class="grade-bold">8.00</td></tr>
+                <tr><td>3</td><td>3</td><td>23CSA01</td><td>GIT AND GITHUB (VAC)</td><td>1.00</td><td class="pass-status">PASS</td><td class="grade-bold">A+</td><td class="grade-bold">9.00</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function validateLogin() {
+            var id = document.getElementById('regNo').value;
+            var pass = document.getElementById('pass').value;
+            
+            if (id === "583224104032" && pass === "19022005") {
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('results-page').style.display = 'block';
+            } else {
+                alert("Invalid Login ID or Password!");
+            }
+        }
+    </script>
+</body>
+</html>
